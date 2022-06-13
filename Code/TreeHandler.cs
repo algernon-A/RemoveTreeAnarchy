@@ -15,10 +15,15 @@ namespace RemoveTreeAnarchy
         internal static void ReallocateTrees()
         {
             // Local references.
+            SimulationManager simulationManager = Singleton<SimulationManager>.instance;
             TreeManager treeManager = Singleton<TreeManager>.instance;
             Array32<TreeInstance> trees = treeManager.m_trees;
             TreeInstance[] treeBuffer = trees.m_buffer;
             Randomizer randomizer = new Randomizer();
+
+            // Pause simulation while reallocating.
+            bool originalForcedPause = simulationManager.ForcedSimulationPaused;
+            simulationManager.ForcedSimulationPaused = true;
 
             // Counting trees.
             int treeCount = 0, okayCount = 0, successCount = 0;
@@ -98,6 +103,9 @@ namespace RemoveTreeAnarchy
                 panel.processingText = message;
                 panel.processingDone = true;
             }
+
+            // Unpause simulation now we're done.
+            simulationManager.ForcedSimulationPaused = originalForcedPause;
         }
     }
 }
