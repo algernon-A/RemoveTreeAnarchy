@@ -33,7 +33,7 @@ namespace RemoveTreeAnarchy
 		internal static StatusPanel Panel => panel;
 
 		// Panel components.
-		private readonly UILabel progressLabel;
+		private UILabel progressLabel;
 
 		// Status.
 		internal bool processingDone = false;
@@ -97,6 +97,9 @@ namespace RemoveTreeAnarchy
 					// Create new panel instance and add it to GameObject.
 					panel = uiGameObject.AddComponent<StatusPanel>();
 					panel.transform.parent = uiGameObject.transform.parent;
+
+					// Setup panel.
+					panel.Setup();
 				}
 			}
 			catch (Exception e)
@@ -117,9 +120,6 @@ namespace RemoveTreeAnarchy
 				return;
 			}
 
-			// Stop modality.
-			UIView.PopModal();
-
 			// Destroy game objects.
 			GameObject.Destroy(panel);
 			GameObject.Destroy(uiGameObject);
@@ -131,9 +131,9 @@ namespace RemoveTreeAnarchy
 
 
 		/// <summary>
-		/// Constructor.
+		/// Sets up the status panel - used instead of a constructor to avoid race conditions that can cause game input focus issues.
 		/// </summary>
-		internal StatusPanel()
+		internal void Setup()
 		{
 			// Basic behaviour.
 			autoLayout = false;
@@ -187,11 +187,6 @@ namespace RemoveTreeAnarchy
 			progressLabel.width = LabelWidth;
 			progressLabel.text = "Processing";
 			progressLabel.relativePosition = new Vector2(Margin, TitleHeight);
-
-			// Display box as modal.
-			this.BringToFront();
-			UIView.PushModal(this);
-			this.Focus();
 		}
 	}
 }
