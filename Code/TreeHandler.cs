@@ -21,8 +21,12 @@ namespace RemoveTreeAnarchy
             TreeInstance[] treeBuffer = trees.m_buffer;
             Randomizer randomizer = new Randomizer();
 
+            // Wait for any existing simulation pauses.
+            while (simulationManager.ForcedSimulationPaused)
+            {
+            }
+
             // Pause simulation while reallocating.
-            bool originalForcedPause = simulationManager.ForcedSimulationPaused;
             simulationManager.ForcedSimulationPaused = true;
 
             // Counting trees.
@@ -105,7 +109,7 @@ namespace RemoveTreeAnarchy
             }
 
             // Unpause simulation now we're done.
-            simulationManager.ForcedSimulationPaused = originalForcedPause;
+            simulationManager.ForcedSimulationPaused = false;
         }
     }
 }
