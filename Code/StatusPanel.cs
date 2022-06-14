@@ -33,13 +33,14 @@ namespace RemoveTreeAnarchy
 		internal static StatusPanel Panel => panel;
 
 		// Panel components.
-		private UILabel progressLabel;
+		private readonly UILabel progressLabel;
 
 		// Status.
 		internal bool processingDone = false;
 		internal string processingText;
 		private float timer;
 		private int timerStep;
+		private bool done = false;
 
 
 		/// <summary>
@@ -49,11 +50,18 @@ namespace RemoveTreeAnarchy
 		{
 			base.Update();
 
+			// Don't do anything further if we're done.
+			if (done)
+			{
+				return;
+			}
+
 			// Is processing completed?
 			if (processingDone)
 			{
 				// Done! Update text label to show result.
 				progressLabel.text = processingText;
+				done = true;
 			}
 			else
 			{
@@ -96,10 +104,6 @@ namespace RemoveTreeAnarchy
 
 					// Create new panel instance and add it to GameObject.
 					panel = uiGameObject.AddComponent<StatusPanel>();
-					panel.transform.parent = uiGameObject.transform.parent;
-
-					// Setup panel.
-					panel.Setup();
 				}
 			}
 			catch (Exception e)
@@ -115,7 +119,7 @@ namespace RemoveTreeAnarchy
 		internal static void Close()
 		{
 			// Don't do anything if no panel, or if we're in the middle of replacing.
-			if (panel == null || !panel.processingDone)
+			if (panel == null || !panel.done)
 			{
 				return;
 			}
@@ -131,9 +135,9 @@ namespace RemoveTreeAnarchy
 
 
 		/// <summary>
-		/// Sets up the status panel - used instead of a constructor to avoid race conditions that can cause game input focus issues.
+		/// Constructor.
 		/// </summary>
-		internal void Setup()
+		internal StatusPanel()
 		{
 			// Basic behaviour.
 			autoLayout = false;

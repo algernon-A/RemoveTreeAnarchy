@@ -49,11 +49,16 @@ namespace RemoveTreeAnarchy
                 return;
             }
 
-            // Display status panel.
-            StatusPanel.Create();
+            // Wait for all loading to complete.
+            while (!Singleton<LoadingManager>.instance.m_loadingComplete)
+            {
+            }
 
             // Rellocate trees via simulation thread.
             Singleton<SimulationManager>.instance.AddAction(() => TreeHandler.ReallocateTrees());
+
+            // Display status panel.
+            StatusPanel.Create();
 
             Logging.Message("loading complete");
         }
