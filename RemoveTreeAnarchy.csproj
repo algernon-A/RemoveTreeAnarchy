@@ -27,4 +27,5 @@
 		</PropertyGroup>
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
 	</Target>
+	<Import Project="..\AlgernonCommons\AlgernonCommonsShared.projitems" Label="Shared" />
 </Project>

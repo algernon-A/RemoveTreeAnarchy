@@ -1,21 +1,22 @@
-﻿using System;
-using UnityEngine;
-using ColossalFramework;
-using ColossalFramework.UI;
-
+﻿// <copyright file="StatusPanel.cs" company="algernon (K. Algernon A. Sheppard)">
+// Copyright (c) algernon (K. Algernon A. Sheppard). All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+// </copyright>
 
 namespace RemoveTreeAnarchy
 {
+    using System;
+	using AlgernonCommons;
+    using ColossalFramework.UI;
+    using UnityEngine;
 
-
-	/// <summary>
-	/// Static class to manage the RON info panel.
-	/// </summary>
-	internal class StatusPanel : UIPanel
+    /// <summary>
+    /// Static class to manage the RON info panel.
+    /// </summary>
+    internal class StatusPanel : UIPanel
 	{
 		// Layout constants - general.
 		private const float Margin = 5f;
-
 
 		// Layout constants - Y.
 		private const float TitleHeight = 45f;
@@ -25,7 +26,6 @@ namespace RemoveTreeAnarchy
 		// Layout constants - X.
 		private const float LabelWidth = 450f;
 		private const float PanelWidth = Margin + Margin + LabelWidth;
-
 
 		// Instance references.
 		private static GameObject uiGameObject;
@@ -41,7 +41,6 @@ namespace RemoveTreeAnarchy
 		private float timer;
 		private int timerStep;
 		private bool done = false;
-
 
 		/// <summary>
 		/// Called by Unity every tick.  Used here to track state of any in-progress replacments.
@@ -87,7 +86,6 @@ namespace RemoveTreeAnarchy
 			}
 		}
 
-
 		/// <summary>
 		/// Creates the panel object in-game and displays it.
 		/// </summary>
@@ -112,7 +110,6 @@ namespace RemoveTreeAnarchy
 			}
 		}
 
-
 		/// <summary>
 		/// Closes the panel by destroying the object (removing any ongoing UI overhead).
 		/// </summary>
@@ -132,7 +129,6 @@ namespace RemoveTreeAnarchy
 			panel = null;
 			uiGameObject = null;
 		}
-
 
 		/// <summary>
 		/// Constructor.
@@ -165,7 +161,7 @@ namespace RemoveTreeAnarchy
 			// Title label.
 			UILabel titleLabel = AddUIComponent<UILabel>();
 			titleLabel.relativePosition = new Vector2(50f, 13f);
-			titleLabel.text = RTAMod.ModName;
+			titleLabel.text = Mod.Instance.Name;
 
 			// Close button.
 			UIButton closeButton = AddUIComponent<UIButton>();

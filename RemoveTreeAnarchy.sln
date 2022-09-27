@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveTreeAnarchy", "RemoveTreeAnarchy.csproj", "{86EE75F7-DBCC-4679-9684-47BFB8274554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveTreeAnarchy", "RemoveTreeAnarchy.csproj", "{86EE75F7-DBCC-4679-9684-47BFB8274554}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AlgernonCommonsShared", "..\AlgernonCommons\AlgernonCommonsShared.shproj", "{25AEF446-6F0D-43A8-BB84-D1306789B68C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,5 +23,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A550C69C-258A-4D3B-BCFA-65C0377C1815}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\AlgernonCommons\AlgernonCommonsShared.projitems*{25aef446-6f0d-43a8-bb84-d1306789b68c}*SharedItemsImports = 13
+		..\AlgernonCommons\AlgernonCommonsShared.projitems*{86ee75f7-dbcc-4679-9684-47bfb8274554}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
