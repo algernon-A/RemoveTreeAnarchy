@@ -14,8 +14,8 @@ namespace RemoveTreeAnarchy
     /// </summary>
     public class Loading : LoadingExtensionBase
     {
-        // Internal flags.
-        internal static bool isModEnabled = false;
+        // Status flag.
+        private static bool s_isModEnabled = false;
 
         /// <summary>
         /// Called by the game when the mod is initialised at the start of the loading process.
@@ -28,13 +28,13 @@ namespace RemoveTreeAnarchy
             // Don't do anything if not in game (e.g. if we're going into an editor).
             if (loading.currentMode != AppMode.Game && loading.currentMode != AppMode.MapEditor)
             {
-                isModEnabled = false;
+                s_isModEnabled = false;
                 Logging.KeyMessage("not loading into game or map editor, skipping activation");
                 return;
             }
 
             // All good to go at this point.
-            isModEnabled = true;
+            s_isModEnabled = true;
             base.OnCreated(loading);
         }
 
@@ -47,7 +47,7 @@ namespace RemoveTreeAnarchy
             base.OnLevelLoaded(mode);
 
             // Don't do anything further if we're not operating.
-            if (!isModEnabled)
+            if (!s_isModEnabled)
             {
                 Logging.Message("exiting");
                 return;

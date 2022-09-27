@@ -24,7 +24,7 @@ namespace RemoveTreeAnarchy
             TreeManager treeManager = Singleton<TreeManager>.instance;
             Array32<TreeInstance> trees = treeManager.m_trees;
             TreeInstance[] treeBuffer = trees.m_buffer;
-            Randomizer randomizer = new Randomizer();
+            Randomizer randomizer = default;
 
             // Wait for any existing simulation pauses.
             while (simulationManager.ForcedSimulationPaused)
@@ -109,8 +109,8 @@ namespace RemoveTreeAnarchy
             // Let the panel know we're done.
             if (StatusPanel.Panel is StatusPanel panel)
             {
-                panel.processingText = message;
-                panel.processingDone = true;
+                panel.ProgressText = message;
+                panel.ProcessingDone = true;
             }
 
             // Unpause simulation now we're done.
